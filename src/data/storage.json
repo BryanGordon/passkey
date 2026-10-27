@@ -1,0 +1,14 @@
+{
+  "usuarios": [
+    {
+      "id": "usr-001",
+      "nombreUsuario": "ana",
+      "contrasenaHash": "scrypt$16384$f7cfd14d9082955596999f9b6fdb1561$bec449babfb77de05fc46c77a0ff9ea9ae5c4b4b6aa42b36ff9fc6885ae259db7f8469830b405d54df810dd7e75d59fb5c261a6e6f4445ba02cbf494731cbca0"
+    },
+    {
+      "id": "usr-002",
+      "nombreUsuario": "bruno",
+      "contrasenaHash": "scrypt$16384$94313df690038b91a83e60b3fbff0af1$f474970f7595213eebfaf354167a53a31e199f7b9b060eab385a4c7be1b07b4ea48090607a88ce316a734d143e4f2d889d010d09de3db3cc21292e4aaabdbe60"
+    }
+  ]
+}
