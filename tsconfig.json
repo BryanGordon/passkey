@@ -1,0 +1,15 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    // `strict` ya lo activa, pero se declara explícitamente porque la nulabilidad no es negociable.
+    "strictNullChecks": true,
+    // Obliga a comprobar el resultado de cualquier acceso por índice.
+    "noUncheckedIndexedAccess": true
+  },
+  "include": [
+    // Tipos generados por Astro (astro/client, astro:transitions, etc.).
+    ".astro/types.d.ts",
+    "src/**/*",
+    "scripts/**/*"
+  ]
+}

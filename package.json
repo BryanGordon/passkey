@@ -1,0 +1,31 @@
+{
+  "name": "passkey",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Sistema web para practicar el flujo de inicio de sesión",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@astrojs/node": "^11.1.9",
+    "astro": "^7.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "eslint": "^9.39.5",
+    "eslint-plugin-astro": "^1.7.0",
+    "neostandard": "^0.14.1",
+    "typescript": "^7.0.2"
+  },
+  "overrides": {
+    "ts-api-utils": {
+      "typescript": "^6.0.3"
+    }
+  }
+}
