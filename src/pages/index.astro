@@ -1,0 +1,10 @@
+---
+/*
+ * La aplicación no tiene portada: la raíz solo lleva a la pantalla de acceso.
+ *
+ * Es un 301 y no un 302 porque la relación no va a cambiar: `/` siempre apuntará
+ * a `/login`. El navegador puede cachearla, que es justo lo que se busca en una
+ * redirección permanente.
+ */
+return Astro.redirect('/login', 301)
+---

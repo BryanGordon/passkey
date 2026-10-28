@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout titulo="Iniciar sesión">
+  <main class="tarjeta">
+    <h1 class="titulo-pagina">Iniciar sesión</h1>
+
+    <form id="formulario-login" novalidate>
+      <div class="campo">
+        <label for="nombreUsuario">Nombre de usuario</label>
+        <input
+          id="nombreUsuario"
+          name="nombreUsuario"
+          type="text"
+          autocomplete="username"
+          autofocus
+        />
+        <p class="mensaje-error" role="alert" aria-live="polite" hidden></p>
+      </div>
+
+      <div class="campo">
+        <label for="contrasena">Contraseña</label>
+        <input
+          id="contrasena"
+          name="contrasena"
+          type="password"
+          autocomplete="current-password"
+        />
+        <p class="mensaje-error" role="alert" aria-live="polite" hidden></p>
+      </div>
+
+      <p id="error-general" class="mensaje-error" role="alert" aria-live="polite" hidden></p>
+
+      <button type="submit" class="boton-primario">Iniciar sesión</button>
+    </form>
+  </main>
+</BaseLayout>
+
+<script>
+  // El módulo se engancha por su cuenta a `astro:page-load` (T-21); aquí solo se
+  // carga. En el frontmatter no serviría: se ejecuta en el servidor y el módulo
+  // toca el DOM.
+  import '../scripts/login'
+</script>
+
+<style>
+  /*
+   * Estilos propios de esta pantalla. Astro los limita a los elementos de este
+   * componente, así que `.boton-primario` aquí solo afecta al botón del login;
+   * el color y el resto de la forma siguen viniendo del tema.
+   */
+  main {
+    width: var(--ancho-tarjeta-login);
+  }
+
+  /* El ancho natural de un botón lo encoge al texto; en una tarjeta de acceso
+     la acción principal ocupa el ancho completo. */
+  .boton-primario {
+    width: 100%;
+  }
+
+  /* El aviso general vive entre los campos y el botón: el tema le quita todos
+     los márgenes, así que aquí se le devuelve la separación de abajo. Oculto no
+     ocupa espacio, porque `hidden` manda. */
+  #error-general {
+    margin-bottom: var(--espaciado-4);
+  }
+</style>

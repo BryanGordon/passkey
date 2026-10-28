@@ -1,0 +1,44 @@
+---
+/*
+ * Diálogo de confirmación del cierre de sesión (D-09).
+ *
+ * No se usa `window.confirm`: el navegador traduce y sustituye el texto, y RF-6
+ * exige exactamente "¿Seguro que quieres cerrar sesión?". Además rompería el
+ * sistema visual (NFR-2).
+ *
+ * Contrato con `src/scripts/bienvenida.ts` (T-20):
+ * - La capa lleva id "modal-cierre" y empieza oculta con `hidden`.
+ * - Dentro del cuadro están los botones "cancelar-cierre" y "confirmar-cierre".
+ *
+ * El componente no tiene estado ni lógica: solo marcado. Abrir, cerrar, el foco
+ * y el cierre con Escape viven en el módulo, no aquí (constitución 4).
+ */
+---
+
+<div class="modal-capa" id="modal-cierre" hidden>
+  <div
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="pregunta-cierre"
+  >
+    <p class="modal-pregunta" id="pregunta-cierre">¿Seguro que quieres cerrar sesión?</p>
+
+    <div class="modal-acciones">
+      <button type="button" class="boton-neutro" id="cancelar-cierre">Cancelar</button>
+      <button type="button" class="boton-acento" id="confirmar-cierre">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /*
+   * El párrafo llega con el margen de 1em que el navegador aplica a todo `p`, y
+   * siendo el primer hijo descompensa el relleno del cuadro. El resto de la
+   * apariencia (capa, superficie, sombra, botones) viene del tema.
+   */
+  .modal-pregunta {
+    margin: 0;
+    font-size: 18px;
+  }
+</style>

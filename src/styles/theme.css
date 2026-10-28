@@ -1,0 +1,267 @@
+/*
+ * Tema visual del proyecto: variables de diseño y componentes.
+ * El layout base (T-15) importa este archivo.
+ */
+
+:root {
+  /* Paleta: azul primario con naranja como complementario.
+     Ningún neutro es puro: todos están teñidos de azul para que el sistema
+     visual no se rompa con grises ajenos a la paleta. */
+  --color-primario: #1B4DD1;
+  --color-primario-oscuro: #10349A;
+  --color-primario-claro: #DCE6FF;
+  --color-acento: #F26A1B;
+  --color-acento-oscuro: #C24E0A;
+  --color-fondo: #E8EEFC;
+  --color-superficie: #F7F9FF;
+  --color-texto: #0D1526;
+  --color-texto-suave: #4A5578;
+  --color-borde: #C3D0F2;
+  --color-error: #A81B3C;
+  --color-error-fondo: #FBE3E9;
+  --color-foco: #F26A1B;
+
+  /* Anchuras fijas: el diseño no es adaptable (NFR-3). */
+  --ancho-contenedor: 960px;
+  --ancho-tarjeta-login: 440px;
+  --ancho-tarjeta-bienvenida: 720px;
+
+  /* Radios. */
+  --radio-borde: 14px;
+  --radio-modal: 18px;
+
+  /* Sombras: derivadas del azul primario, nunca de un gris. */
+  --sombra-tarjeta: 0 18px 40px -20px rgba(27, 77, 209, 0.45);
+  --sombra-boton: 0 6px 14px -8px rgba(27, 77, 209, 0.6);
+
+  /* Escala de espaciado. */
+  --espaciado-1: 4px;
+  --espaciado-2: 8px;
+  --espaciado-3: 12px;
+  --espaciado-4: 20px;
+  --espaciado-5: 32px;
+  --espaciado-6: 48px;
+
+  /* Tipografía del sistema: no se carga ninguna fuente externa. */
+  --fuente-base: "Segoe UI", system-ui, sans-serif;
+
+  /* Transiciones. */
+  --transicion-base: 160ms ease;
+}
+
+/* --- Capa base ------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/*
+ * El atributo `hidden` del HTML se implementa con `display: none` en la hoja
+ * del navegador, y cualquier `display` propio lo anula. Como los mensajes de
+ * error y la capa del modal empiezan ocultos con `hidden` y a la vez declaran
+ * `display`, hace falta recuperar esa prioridad explícitamente. Sin esto, los
+ * mensajes aparecerían desde el primer render.
+ */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente-base);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* --- Contenedor y tarjeta ------------------------------------------------- */
+
+/*
+ * Centra la tarjeta en los dos ejes. El plan (8.3) define este contenedor como
+ * "ancho fijo y centrado": la anchura y el centrado horizontal ya existían,
+ * la altura completa y el centrado vertical los necesita la tarjeta para
+ * quedar en medio de la ventana.
+ *
+ * `min-height` en lugar de `height`: si algún día el contenido crece más que la
+ * ventana, el contenedor crece con él en vez de recortarlo.
+ */
+.contenedor {
+  width: var(--ancho-contenedor);
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tarjeta {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-tarjeta);
+  padding: var(--espaciado-5);
+}
+
+/* --- Campos --------------------------------------------------------------- */
+
+/*
+ * `.campo` agrupa etiqueta, control y mensaje. `.campo-error` se aplica al
+ * mismo contenedor cuando el campo tiene un error, y el control hereda el
+ * borde y el fondo de error.
+ */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaciado-2);
+  margin-bottom: var(--espaciado-4);
+}
+
+.campo label {
+  color: var(--color-texto-suave);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.campo input {
+  width: 100%;
+  padding: var(--espaciado-3) var(--espaciado-4);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  background-color: var(--color-superficie);
+  color: var(--color-texto);
+  font: inherit;
+  transition: border-color var(--transicion-base), background-color var(--transicion-base);
+}
+
+.campo input:focus-visible {
+  border-color: var(--color-foco);
+}
+
+.campo-error input {
+  border-color: var(--color-error);
+  background-color: var(--color-error-fondo);
+}
+
+.mensaje-error {
+  margin: 0;
+  padding: var(--espaciado-3);
+  border-radius: var(--radio-borde);
+  background-color: var(--color-error-fondo);
+  color: var(--color-error);
+  font-size: 14px;
+}
+
+/* --- Botones -------------------------------------------------------------- */
+
+.boton-primario,
+.boton-acento,
+.boton-neutro {
+  padding: var(--espaciado-3) var(--espaciado-5);
+  border: 1px solid transparent;
+  border-radius: var(--radio-borde);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transicion-base), border-color var(--transicion-base),
+    color var(--transicion-base);
+}
+
+.boton-primario,
+.boton-acento {
+  box-shadow: var(--sombra-boton);
+}
+
+.boton-primario {
+  background-color: var(--color-primario);
+  color: var(--color-superficie);
+}
+
+.boton-primario:hover {
+  background-color: var(--color-primario-oscuro);
+}
+
+.boton-acento {
+  background-color: var(--color-acento);
+  color: var(--color-superficie);
+}
+
+.boton-acento:hover {
+  background-color: var(--color-acento-oscuro);
+}
+
+.boton-neutro {
+  background-color: transparent;
+  border-color: var(--color-borde);
+  color: var(--color-texto-suave);
+}
+
+.boton-neutro:hover {
+  background-color: var(--color-primario-claro);
+  color: var(--color-primario-oscuro);
+}
+
+.boton-primario:disabled,
+.boton-acento:disabled,
+.boton-neutro:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* --- Diálogo de confirmación ---------------------------------------------- */
+
+.modal-capa {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(13, 21, 38, 0.55);
+}
+
+.modal {
+  width: 420px;
+  padding: var(--espaciado-5);
+  border-radius: var(--radio-modal);
+  background-color: var(--color-superficie);
+  box-shadow: var(--sombra-tarjeta);
+}
+
+.modal-acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--espaciado-3);
+  margin-top: var(--espaciado-5);
+}
+
+/* --- Tipografía ----------------------------------------------------------- */
+
+.titulo-pagina {
+  margin: 0 0 var(--espaciado-4);
+  color: var(--color-primario);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.saludo {
+  margin: 0 0 var(--espaciado-4);
+  /* El plan (7.2) marca el saludo en azul primario: es el único texto grande de
+     la pantalla de bienvenida y le da el peso visual del título. */
+  color: var(--color-primario);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* --- Foco ----------------------------------------------------------------- */
+
+/*
+ * Un único anillo para todo elemento interactivo: cubre campos, botones y
+ * cualquier control futuro sin enumerar selectores.
+ */
+:focus-visible {
+  outline: 2px solid var(--color-foco);
+  outline-offset: 2px;
+}

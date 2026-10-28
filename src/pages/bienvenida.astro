@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import ModalConfirmacion from '../components/ModalConfirmacion.astro'
+---
+
+<BaseLayout titulo="Bienvenida">
+  <main class="tarjeta">
+    <!--
+      Este elemento es el hueco del saludo: llega vacío y `bienvenida.ts` lo
+      rellena con "Bienvenido/a, {nombreUsuario}" usando `textContent` (RF-13).
+      Escribir aquí un texto de ejemplo sería un parpadeo que se sustituye.
+    -->
+    <h1 class="saludo" id="saludo-usuario"></h1>
+
+    <p class="texto-secundario">Has iniciado sesión correctamente</p>
+
+    <button type="button" class="boton-acento" id="boton-cerrar-sesion">Cerrar sesión</button>
+  </main>
+
+  <!-- El diálogo va en el documento desde el principio, oculto con `hidden`:
+       abrirlo no crea ni destruye marcado, solo cambia ese atributo. -->
+  <ModalConfirmacion />
+</BaseLayout>
+
+<script>
+  // Como en el login: el módulo se engancha solo a `astro:page-load` (T-21) y
+  // la página únicamente lo carga. En el frontmatter se ejecutaría en el
+  // servidor, donde no hay DOM.
+  import '../scripts/bienvenida'
+</script>
+
+<style>
+  /* Ancho fijo de la pantalla de bienvenida (plan 7.2). El centrado lo pone
+     `.contenedor`, que ya reparte la tarjeta en los dos ejes. */
+  main {
+    width: var(--ancho-tarjeta-bienvenida);
+  }
+
+  .texto-secundario {
+    margin: 0 0 var(--espaciado-5);
+    color: var(--color-texto-suave);
+  }
+</style>

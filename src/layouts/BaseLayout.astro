@@ -1,0 +1,24 @@
+---
+import { ClientRouter } from 'astro:transitions'
+import '../styles/theme.css'
+
+interface Props {
+  titulo: string
+}
+
+const { titulo } = Astro.props
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>{titulo}</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <div class="contenedor">
+      <slot />
+    </div>
+  </body>
+</html>
